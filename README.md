@@ -3,15 +3,16 @@
 
 ##Webmock Style Mocking Framework for Jasmine Testing
 
-To stub requests that look like these
+A typical JSONP request has this form.
 
 ```javascript
   var url = "http://api.twitter.com/1/trends/available.json?callback=?";
 
   $.getJSON(url).
     success(function(data) {
+      // do somehting meaningful
       console.log("success", data);
-	});
+    });
 ```
 
 The resulting JSONP object has all of the standard jqXHR methods.
@@ -25,7 +26,9 @@ Calling `.success`, `.error` or `.complete` on this object will perform the spec
 
 ```javascript
 // Then simply invoke the appropriate callback
-  request.success([{"url": "http://t.co/someurl", "name": "#justinbieber"}])
+  request.success([{"url": "http://t.co/someurl", "name": "#justinbieber"}]);
+  
+  request.error([{"error_code": "101", "error_text": "an error"}]);
 ```
 
 ##Full Example
@@ -41,9 +44,9 @@ Calling `.success`, `.error` or `.complete` on this object will perform the spec
         return trend.url;     
       };
 
-	  that.model.set("trend_urls", urls);
-	  that.model.trigger("change:trendUrls");
-	}).
+      that.model.set("trend_urls", urls);
+      that.model.trigger("change:trendUrls");
+    }).
     error(function() {
       that.errors.reset([I18n.t("twitter.trends.error")]);
     });
