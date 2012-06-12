@@ -1,0 +1,13 @@
+src_files:
+  - vendor/jquery.js
+  - lib/javascripts/*.js
+
+helpers:
+  - helpers/**/*.js
+
+spec_files:
+  - '**/*[sS]pec.js'
+
+src_dir:
+
+spec_dir: spec/javascripts
